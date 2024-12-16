@@ -3,6 +3,7 @@
         mobileMenuOpen: false, 
         scrolled: false, 
         showOverlay: false, 
+        dropdownOpen: false, 
         topOffset: '5',
         evaluateScrollPosition(){
             if(window.pageYOffset > this.topOffset){
@@ -50,7 +51,7 @@
                         <svg x-show="!mobileMenuOpen" class="w-6 h-6" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"></path>
                         </svg>
-                        <svg x-show="mobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                        <svg x-show="mobileMenuOpen" class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                         </svg>
                     </button>
@@ -62,42 +63,52 @@
                     :class="{ 'hidden md:flex' : !mobileMenuOpen, 'flex flex-col absolute md:relative md:w-auto w-screen h-full md:h-full md:overflow-auto overflow-scroll md:pt-0 mt-24 md:pb-0 pb-48 bg-white md:bg-transparent' : mobileMenuOpen  }"
                     id="menu"
                     class="flex items-stretch justify-start flex-1 w-full h-full ml-0 border-t border-gray-100 pointer-events-auto md:items-center md:justify-center gap-x-8 md:w-auto md:border-t-0 md:flex-row">
-
                     <li>
                         <a href="{{ route('home') }}"
-                            x-on:click="open=!open"
                             class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
                             <span>Home</span>
                             <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-blue-500 to-green-500 transition-all duration-300 group-hover:w-full"></span>
                         </a>
                     </li>
-                    <li>
-                        <a href="#_"
-                            x-on:click="open=!open"
+                    <li class="relative group">
+                        <a href="home"
+                            x-on:click.prevent="dropdownOpen = !dropdownOpen"
                             class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
-                            <span>Proverbs</span>
+                            <span>Spreekwoorden/Gezegden</span>
                             <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
                         </a>
+                        <!-- Dropdown menu -->
+                        <ul
+                            x-show="dropdownOpen"
+                            x-transition:enter="transition ease-out duration-200"
+                            x-transition:enter-start="opacity-0 scale-95"
+                            x-transition:enter-end="opacity-100 scale-100"
+                            x-transition:leave="transition ease-in duration-150"
+                            x-transition:leave-start="opacity-100 scale-100"
+                            x-transition:leave-end="opacity-0 scale-95"
+                            class="absolute left-0 z-20 w-40 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
+                            <li>
+                                <a href="home"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Spreekwoorden</a>
+                            </li>
+                            <li>
+                                <a href="home"
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gezegden</a>
+                            </li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="#_"
-                            x-on:click="open=!open"
-                            class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
-                            <span>Over Ons</span>
-                            <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-orange-500 to-yellow-500 transition-all duration-300 group-hover:w-full"></span>
-                        </a>
-                    </li>
+
+
+
                     <li>
                         <a href="{{ route('pricing') }}"
-                            x-on:click="open=!open"
                             class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
-                            <span>Prijzen</span>
+                            <span>Plannen</span>
                             <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-teal-500 to-cyan-500 transition-all duration-300 group-hover:w-full"></span>
                         </a>
                     </li>
                     <li>
                         <a href="{{ route('blog') }}"
-                            x-on:click="open=!open"
                             class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
                             <span>Quiz</span>
                             <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-red-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>
