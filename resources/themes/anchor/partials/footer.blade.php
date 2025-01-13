@@ -11,24 +11,15 @@
                     <h3 class="font-semibold text-black">About</h3>
                     <ul class="mt-6 space-y-4 text-sm">
 
+                       
                         <li>
                             <a href="#_" class="relative inline-block text-black group">
                                 <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-1"></span>
-                                <span>Company</span>
+                                <span>Onze Team</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="#_" class="relative inline-block text-black group">
-                                <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-1"></span>
-                                <span>Our Team</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#_" class="relative inline-block text-black group">
-                                <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-1"></span>
-                                <span>Work With Us</span>
-                            </a>
-                        </li>
+                       
+                        
                     </ul>
                 </div>
 
@@ -46,7 +37,7 @@
                         <li>
                             <a href="#_" class="relative inline-block text-black group">
                                 <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-1"></span>
-                                <span>Email</span>
+                                <span>35801@ma-web.nl</span>
                             </a>
                         </li>
                     </ul>
@@ -58,16 +49,16 @@
             <ul class="flex flex-wrap space-x-5 text-xs">
                 <li class="mb-6 text-center flex-full lg:flex-none lg:mb-0">&copy; {{ date('Y') }} {{ setting('Joe', 'Joe') }}, Inc. All rights reserved.</li>
                 <li class="lg:ml-6">
-                    <a href="#_" class="relative inline-block text-black group">
+                    <a href="{{ route('privacy') }}" class="relative inline-block text-black group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
-                        <span>Privacy Policy</span>
+                        <span>Privacy Beleid</span>
                     </a>
                 </li>
 
                 <li class="lg:ml-6">
-                    <a href="#_" class="relative inline-block text-black group">
+                    <a href="{{ route('terms') }}" class="relative inline-block text-black group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
-                        <span>Terms and Conditions</span>
+                        <span>Algemeene Voorwaarden</span>
                     </a>
                 </li>
             </ul>

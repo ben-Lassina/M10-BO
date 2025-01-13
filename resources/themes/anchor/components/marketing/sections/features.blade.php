@@ -23,7 +23,7 @@
                 <div class="mt-6">
                     <h3 class="font-medium text-zinc-900">Illustraties</h3>
                     <p class="mt-2 text-sm text-zinc-500">
-                    Elke uitdrukking heeft een duidelijke afbeelding.
+                        Elke uitdrukking heeft een duidelijke afbeelding.
                     </p>
                 </div>
             </div>
@@ -32,10 +32,10 @@
                     <x-phosphor-puzzle-piece class="w-6 h-6" />
                 </div>
                 <div class="mt-6">
-                    <h3 class="font-medium text-zinc-900">Meertaligheid</h3>
-                    <p class="mt-2 text-sm text-zinc-500">
-                    De website is beschikbaar in zeven talen.
-                    </p>
+                    <h3 class="font-medium text-zinc-900">Ontdek, Leer en Begrijp
+                        <p class="mt-2 text-sm text-zinc-500">
+                            De website helpt gebruikers Nederlandse spreekwoorden en gezegden te ontdekken en begrijpen.
+                        </p>
                 </div>
             </div>
             <div>
@@ -45,7 +45,7 @@
                 <div class="mt-6">
                     <h3 class="font-medium text-zinc-900">Quizzen</h3>
                     <p class="mt-2 text-sm text-zinc-500">
-                    Test je kennis met interactieve quizzen.
+                        Test je kennis met interactieve quizzen.
                     </p>
                 </div>
             </div>
@@ -56,7 +56,7 @@
                 <div class="mt-6">
                     <h3 class="font-medium text-zinc-900">Professionals</h3>
                     <p class="mt-2 text-sm text-zinc-500">
-                    Voor professionals zijn er extra functies, zoals het downloaden van afbeeldingen.
+                        Voor professionals zijn er extra functies, zoals het downloaden van afbeeldingen.
                     </p>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <div class="mt-6">
                     <h3 class="font-medium text-zinc-900">Gebruiksvriendelijk</h3>
                     <p class="mt-2 text-sm text-zinc-500">
-                    De website is makkelijk te gebruiken op mobiel en computer.
+                        De website is makkelijk te gebruiken op mobiel en computer.
                     </p>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <div class="mt-6">
                     <h3 class="font-medium text-zinc-900">Toegankelijk</h3>
                     <p class="mt-2 text-sm text-zinc-500">
-                    Voor iedereen die meer wil leren over de Nederlandse taal.
+                        Voor iedereen die meer wil leren over de Nederlandse taal.
                     </p>
                 </div>
             </div>
@@ -89,7 +89,7 @@
                 <div class="mt-6">
                     <h3 class="font-medium text-zinc-900">Veiligheid</h3>
                     <p class="mt-2 text-sm text-zinc-500">
-                    Jouw gegevens zijn goed beschermd.
+                        Jouw gegevens zijn goed beschermd.
                     </p>
                 </div>
             </div>

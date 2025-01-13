@@ -71,31 +71,12 @@
                         </a>
                     </li>
                     <li class="relative group">
-                        <a href="home"
-                            x-on:click.prevent="dropdownOpen = !dropdownOpen"
+                        <a href=""
                             class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
                             <span>Spreekwoorden/Gezegden</span>
                             <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
                         </a>
-                        <!-- Dropdown menu -->
-                        <ul
-                            x-show="dropdownOpen"
-                            x-transition:enter="transition ease-out duration-200"
-                            x-transition:enter-start="opacity-0 scale-95"
-                            x-transition:enter-end="opacity-100 scale-100"
-                            x-transition:leave="transition ease-in duration-150"
-                            x-transition:leave-start="opacity-100 scale-100"
-                            x-transition:leave-end="opacity-0 scale-95"
-                            class="absolute left-0 z-20 w-40 mt-2 origin-top-left bg-white border border-gray-200 divide-y divide-gray-100 rounded-md shadow-lg">
-                            <li>
-                                <a href="home"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Spreekwoorden</a>
-                            </li>
-                            <li>
-                                <a href="home"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Gezegden</a>
-                            </li>
-                        </ul>
+                       
                     </li>
 
 
@@ -108,7 +89,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('blog') }}"
+                        <a href=""
                             class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
                             <span>Quiz</span>
                             <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-red-500 to-pink-500 transition-all duration-300 group-hover:w-full"></span>

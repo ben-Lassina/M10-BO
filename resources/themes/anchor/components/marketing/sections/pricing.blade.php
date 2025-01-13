@@ -54,8 +54,25 @@
                     </div>
 
                     <div class="px-8 mt-5">
-                        <span class="text-5xl font-bold">$<span x-text="billing == 'Monthly' ? '{{ $plan->monthly_price }}' : '{{ $plan->yearly_price }}'"></span></span>
-                        <span class="text-xl font-bold text-zinc-500"><span x-text="billing == 'Monthly' ? '/mo' : '/yr'"></span></span>
+                        <div class="flex items-baseline space-x-2">
+                            <span class="text-5xl font-bold">
+                                €<span x-text="
+                                    billing == 'Monthly' 
+                                    ? '{{ number_format($plan->monthly_price * 0.9, 2) }}'  // 10% discount on first month
+                                    : '{{ number_format(($plan->monthly_price * 12) * 0.85, 2) }}' // 15% discount for yearly price
+                                "></span>
+                            </span>
+                            <span class="text-lg font-medium text-zinc-500 line-through">
+                                €<span x-text="
+                                    billing == 'Monthly'
+                                    ? '{{ number_format($plan->monthly_price, 2) }}'
+                                    : '{{ number_format($plan->monthly_price * 12, 2) }}'
+                                "></span>
+                            </span>
+                        </div>
+                        <span class="text-xl font-bold text-zinc-500">
+                            <span x-text="billing == 'Monthly' ? '/maand (eerste maand)' : '/jaar (15% korting)'"></span>
+                        </span>
                     </div>
 
                     <div class="px-8 pb-10 mt-3">
@@ -71,7 +88,7 @@
                                         <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"></path>
                                     </svg>
                                     <span class="text-zinc-700">
-                                        {{ $feature }} 
+                                        {{ $feature }}
                                     </span>
                                 </span>
                             </li>
@@ -89,6 +106,4 @@
             @endforeach
         </div>
     </div>
-
-
-</section>
+</section>  

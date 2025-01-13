@@ -21,22 +21,22 @@
         <div class="grid h-auto grid-cols-1 px-8 py-10 mx-auto space-y-5 divide-y max-w-7xl lg:space-y-0 lg:divide-y-0 divide-zinc-200 lg:py-0 lg:divide-x md:px-12 lg:px-20 lg:divide-zinc-200 lg:grid-cols-3">
             <div class="">
                 <h3 class="flex items-center font-medium text-zinc-900">
-                Belangrijkste Kenmerk
+                    Belangrijkste Kenmerk
                 </h3>
                 <p class="mt-2 text-sm font-medium text-zinc-500">
-                Elk spreekwoord of gezegde wordt gecombineerd met een unieke illustratie, waardoor gebruikers visueel verbinding kunnen maken met de betekenis achter de zin en deze kunnen vergelijken<span class="hidden lg:inline">met hun eigen interpretaties.</span>
+                    Elk spreekwoord of gezegde wordt gecombineerd met een unieke illustratie, waardoor gebruikers visueel verbinding kunnen maken met de betekenis achter de zin en deze kunnen vergelijken<span class="hidden lg:inline">met hun eigen interpretaties.</span>
                 </p>
             </div>
             <div class="pt-5 lg:pt-0 lg:px-10">
-                <h3 class="font-medium text-zinc-900">Beperktere Taalopties</h3>
-                <p class="mt-2 text-sm text-zinc-500">
-                Hoewel de website vertalingen in zeven talen biedt, kunnen gebruikers zich beperkt voelen als hun voorkeurstaal niet beschikbaar is, wat de toegankelijkheid voor een breder <span class="hidden lg:inline"> publiek vermindert.</span>
-                </p>
+                <h3 class="font-medium text-zinc-900">Ontdek, Leer en Begrijp
+                    <p class="mt-2 text-sm text-zinc-500">
+                        Met illustraties, betekenissen en quizes leert de gebruiker op een leuke en interactieve manier over taal en cultuur. Voor professionals biedt de site extra opties, zoals het downloaden van illustraties.
+                    </p>
             </div>
             <div class="pt-5 lg:pt-0 lg:px-10">
                 <h3 class="font-medium text-zinc-900">Unieke Voordeel</h3>
                 <p class="mt-2 text-sm text-zinc-500">
-                De combinatie van illustraties, betekenissen en interactieve quizzen biedt een creatieve en leerzame manier om Nederlandse spreekwoorden en gezegden te ontdekken.
+                    De combinatie van illustraties, betekenissen en interactieve quizzen biedt een creatieve en leerzame manier om Nederlandse spreekwoorden en gezegden te ontdekken.
                 </p>
             </div>
         </div>
