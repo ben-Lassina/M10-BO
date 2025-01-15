@@ -31,6 +31,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ProfileKeyValuesTableSeeder::class);
         $this->call(ThemesTableSeeder::class);
         fixPostgresSequence();
+       
     }
 }
 

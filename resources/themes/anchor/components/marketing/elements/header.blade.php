@@ -71,7 +71,7 @@
                         </a>
                     </li>
                     <li class="relative group">
-                        <a href=""
+                        <a href="{{ route('main') }}"
                             class="flex items-center w-full h-16 gap-1 text-sm font-semibold text-gray-700 transition duration-300 px-7 md:h-full md:px-0 md:w-auto hover:text-gray-900 relative group">
                             <span>Spreekwoorden/Gezegden</span>
                             <span class="absolute bottom-0 left-0 w-0 h-1 bg-gradient-to-r from-pink-500 to-purple-500 transition-all duration-300 group-hover:w-full"></span>
