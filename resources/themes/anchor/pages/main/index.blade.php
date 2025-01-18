@@ -7,6 +7,7 @@ name('main');
     <div class="container mx-auto py-10">
         <h1 class="text-3xl font-bold text-center mb-6">Spreekwoorden en Gezegden</h1>
 
+        @auth
         <!-- Search Bar -->
         <div class="flex justify-center mb-6">
             <input 
@@ -29,8 +30,22 @@ name('main');
                 </button>
             @endforeach
         </div>
+        @endauth
+
+        @guest
+        <!-- Message for Unauthenticated Users -->
+        <div class="flex justify-center mb-6">
+            <p class="text-lg text-center text-red-500">
+                U moet zich aanmelden om toegang te krijgen tot deze content. 
+                <a href="/login" class="text-blue-500 underline">Aanmelden</a>
+                of 
+                <a href="/register" class="text-blue-500 underline">Registreren</a>.
+            </p>
+        </div>
+        @endguest
 
         <!-- Modal -->
+        @auth
         <div 
             id="image-modal" 
             class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden z-50"
@@ -50,11 +65,65 @@ name('main');
                 </div>
             </div>
         </div>
+        @endauth
     </div>
 
+    @auth
     <script>
-        let images = [];
+         // Global variables
+         let quotes = [];
         let currentIndex = 0;
+
+        // Fetch daily quote
+        function fetchDailyQuote() {
+    fetch('/quote-of-the-day')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('daily-quote-image').src = data.image_path;
+            document.getElementById('daily-quote-text').innerText = data.quote;
+            document.getElementById('daily-quote-meaning').innerText = data.meaning;
+        })
+        .catch(error => console.error('Error fetching daily quote:', error));
+}
+
+
+function fetchQuotes(language) {
+    fetch(`/quotes/${language}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+                return;
+            }
+            quotes = data;
+            currentIndex = 0; // Reset index
+            updateQuoteCarousel();
+            document.getElementById('quote-carousel').classList.remove('hidden');
+        })
+        .catch(error => console.error('Error fetching quotes:', error));
+}
+
+
+        // Update the carousel
+        function updateQuoteCarousel() {
+            const quote = quotes[currentIndex];
+            document.getElementById('carousel-image').src = quote.image_path;
+            document.getElementById('carousel-quote').innerText = quote.quote;
+            document.getElementById('carousel-meaning').innerText = quote.meaning;
+        }
+
+        // Navigate through the quotes
+        function navigateQuotes(direction) {
+            currentIndex = (currentIndex + direction + quotes.length) % quotes.length;
+            updateQuoteCarousel();
+        }
+
+        // Initialize daily quote fetch
+        document.addEventListener('DOMContentLoaded', fetchDailyQuote);
+
+
+        let images = [];
+        let currentIndexs = 0;
 
         // Fetch images by letter
         function fetchImages(letter) {
@@ -65,7 +134,7 @@ name('main');
                 })
                 .then(data => {
                     images = data;
-                    currentIndex = 0;
+                    currentIndexs = 0;
 
                     if (images.length > 0) {
                         showModal(images[0].path);
@@ -106,25 +175,26 @@ name('main');
 
         // Show previous image
         function previousImage() {
-            if (currentIndex > 0) {
-                currentIndex--;
-                document.getElementById('modal-image').src = images[currentIndex].path;
+            if (currentIndexs > 0) {
+                currentIndexs--;
+                document.getElementById('modal-image').src = images[currentIndexs].path;
             }
         }
 
         // Show next image
         function nextImage() {
-            if (currentIndex < images.length - 1) {
-                currentIndex++;
-                document.getElementById('modal-image').src = images[currentIndex].path;
+            if (currentIndexs < images.length - 1) {
+                currentIndexs++;
+                document.getElementById('modal-image').src = images[currentIndexs].path;
             }
         }
 
         // Add event listener to close the modal
         document.getElementById('close-modal-btn').addEventListener('click', closeModal);
     </script>
+    @endauth
 
-<x-container class="py-12 border-t sm:py-24 border-zinc-200">
-    <x-marketing.sections.quote />
-</x-container>
+    <x-container class="py-12 border-t sm:py-24 border-zinc-200">
+        <x-marketing.sections.quote />
+    </x-container>
 </x-layouts.marketing>

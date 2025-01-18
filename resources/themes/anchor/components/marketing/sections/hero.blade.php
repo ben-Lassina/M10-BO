@@ -14,9 +14,10 @@
                         Spreekwoorden verkennen
                     </x-button>
                 </a>
-
+                <a href="{{ route('quiz') }}">
                 <x-button size="lg" color="secondary" class="w-full lg:w-auto">Doe de quiz!</x-button>
             </div>
+            </a>
         </div>
         <div class="flex items-center justify-center w-full mt-12 lg:w-1/2 lg:mt-0">
             <img alt="Wave Character" class="relative w-full lg:scale-125 xl:translate-x-6" src="/wave/img/community.png" style="max-width:450px;">

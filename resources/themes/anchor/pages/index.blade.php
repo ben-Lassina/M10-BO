@@ -6,7 +6,7 @@
 <x-layouts.marketing
     :seo="[
         'title'         => setting('site.title', 'Spreekwoorden en gezegden tool'),
-        'description'   => setting('site.description', 'Software as a Service Starter Kit'),
+        'description'   => setting('site.description', 'Spreekwoorden en gezegden tool'),
         'image'         => url('/og_image.png'),
         'type'          => 'website'
     ]"

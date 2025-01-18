@@ -3,7 +3,7 @@
     
     <!-- Quiz Section with Button -->
     <div class="flex justify-center mt-12">
-        <a href="" class="inline-block px-8 py-3 bg-blue-500 text-white font-semibold rounded-full hover:bg-blue-600 transition-colors">
+    <a href="{{ route('quiz') }}" class="inline-block px-8 py-3 bg-blue-500 text-white font-semibold rounded-full hover:bg-blue-600 transition-colors">
             Doe de Quiz
         </a>
     </div>
