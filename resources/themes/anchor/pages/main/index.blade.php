@@ -7,6 +7,7 @@ name('main');
     <div class="container mx-auto py-10">
         <h1 class="text-3xl font-bold text-center mb-6">Spreekwoorden en Gezegden</h1>
 
+        @auth
         <!-- Search Bar -->
         <div class="flex justify-center mb-6">
             <input 
@@ -29,8 +30,22 @@ name('main');
                 </button>
             @endforeach
         </div>
+        @endauth
+
+        @guest
+        <!-- Message for Unauthenticated Users -->
+        <div class="flex justify-center mb-6">
+            <p class="text-lg text-center text-red-500">
+                U moet zich aanmelden om toegang te krijgen tot deze content. 
+                <a href="/login" class="text-blue-500 underline">Aanmelden</a>
+                of 
+                <a href="/register" class="text-blue-500 underline">Registreren</a>.
+            </p>
+        </div>
+        @endguest
 
         <!-- Modal -->
+        @auth
         <div 
             id="image-modal" 
             class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden z-50"
@@ -50,8 +65,10 @@ name('main');
                 </div>
             </div>
         </div>
+        @endauth
     </div>
 
+    @auth
     <script>
         let images = [];
         let currentIndex = 0;
@@ -123,8 +140,9 @@ name('main');
         // Add event listener to close the modal
         document.getElementById('close-modal-btn').addEventListener('click', closeModal);
     </script>
+    @endauth
 
-<x-container class="py-12 border-t sm:py-24 border-zinc-200">
-    <x-marketing.sections.quote />
-</x-container>
+    <x-container class="py-12 border-t sm:py-24 border-zinc-200">
+        <x-marketing.sections.quote />
+    </x-container>
 </x-layouts.marketing>
