@@ -1,109 +1,141 @@
-<section>
-    <x-marketing.elements.heading
+<section class="flex flex-col items-center justify-center p-4 gap-2 text-center">
+  
+    <x-marketing.elements.heading class="flex-col justify-center gap-y-2"
         level="h2"
-        title="Ontgrendel de Wereld van Spreekwoorden en Gezegden"
-        description="Til je kennis van Nederlandse spreekwoorden en gezegden naar een hoger niveau met ons premium abonnement! " />
+        title="Abonnementen"
+        description="Bekijk hier welk abonnement bij je past!"
+    />
+</section>
 
-    <div x-data="{ on: false, billing: '{{ get_default_billing_cycle() }}',
-            toggleRepositionMarker(toggleButton){
-                this.$refs.marker.style.width=toggleButton.offsetWidth + 'px';
-                this.$refs.marker.style.height=toggleButton.offsetHeight + 'px';
-                this.$refs.marker.style.left=toggleButton.offsetLeft + 'px';
-            }
-         }"
-        x-init="
-                setTimeout(function(){ 
-                    toggleRepositionMarker($refs.monthly); 
-                    $refs.marker.classList.remove('opacity-0');
-                    setTimeout(function(){ 
-                        $refs.marker.classList.add('duration-300', 'ease-out');
-                    }, 10); 
-                }, 1);
-        "
-        class="w-full max-w-6xl mx-auto mt-12 mb-2 md:my-12" x-cloak>
+    <?php
+// Array of data for each tier
+$tiers = [
+    [
+        "title" => "Nieuwsgierige liefhebbers van taal",
+        "monthly_price" => "€2,49",
+        "yearly_price" => "€24,99",
+        "features" => [
+            "Basisgebruik van de website - op termijn app",
+            "Beperkte selectie van 25 plaatjes",
+            "Ideaal als instapper",
+            "Favorieten opslaan"
+        ],
+        "stripe_price_id_monthly" => "price_1QiCBgFllnWu1kBS8o06btGE",
+        "stripe_price_id_yearly" => "price_1QiCBgFllnWu1kBS8o06btGE"
+    ],
+    [
+        "title" => "Liefhebbers van taal",
+        "monthly_price" => "€3,99",
+        "yearly_price" => "€39,99",
+        "features" => [
+            "Toegang tot uitgebreide functies",
+            "Versturen van 30 plaatjes per maand",
+            "Ideaal voor liefhebbers die de app intensiever willen gebruiken",
+            "Exclusieve content"
+        ],
+        "stripe_price_id_monthly" => "price_1QiCE4FllnWu1kBSTu2ofYLd",
+        "stripe_price_id_yearly" => "price_1QiCLAFllnWu1kBSzvkLUELc"
+    ],
+    [
+        "title" => "Onderwijs Professionals",
+        "monthly_price" => "€6,99",
+        "yearly_price" => "€69,99",
+        "features" => [
+            "Toegang tot extra lesmateriaal",
+            "Versturen van 60 plaatjes per maand",
+            "Beperkt downloaden - 20 plaatjes per maand"
+        ],
+        "stripe_price_id_monthly" => "price_1QiCIhFllnWu1kBSZFuoW4Is",
+        "stripe_price_id_yearly" => "price_1QiCIhFllnWu1kBSXza1zyib"
+    ],
+    [
+        "title" => "Docenten Nederlands",
+        "monthly_price" => "€14,99",
+        "yearly_price" => "€149,99",
+        "features" => [
+            "Onbeperkt versturen en downloaden",
+            "Volledige toegang tot alle tools",
+            "Speciaal ontworpen voor docenten met intensieve lesvoorbereidingen"
+        ],
+        "stripe_price_id_monthly" => "price_1QiCPDFllnWu1kBS2lyet8pK",
+        "stripe_price_id_yearly" => "price_1QiCPmFllnWu1kBS4QTOvj6x"
+    ],
+    [
+        "title" => "Scholen",
+        "monthly_price" => "€49,99",
+        "yearly_price" => "€149,99",
+        "features" => [
+            "Volledige toegan voor het hele schoolteam",
+            "Onbeperkt gebruik door alle aangesloten docenten",
+            "Ideaal voor onderwijsinstellingen",
+        ],
+        "stripe_price_id_monthly" => "price_1QiCQkFllnWu1kBS0rDzxGN4",
+        "stripe_price_id_yearly" => "price_1QiCQkFllnWu1kBS0rDzxGN4"
+    ]
+];
 
-        @if(has_monthly_yearly_toggle())
-        <div class="relative flex items-center justify-start pb-5 -translate-y-2 md:justify-center">
-            <div class="relative inline-flex items-center justify-center w-auto p-1 text-center -translate-y-3 border-2 rounded-full md:mx-auto border-zinc-900">
-                <div x-ref="monthly" x-on:click="billing='Monthly'; toggleRepositionMarker($el)" :class="{ 'text-white': billing == 'Monthly', 'text-zinc-900' : billing != 'Monthly' }" class="relative z-20 px-3.5 py-1 text-sm font-medium leading-6 rounded-full duration-300 ease-out cursor-pointer">
-                    Monthly
-                </div>
-                <div x-ref="yearly" x-on:click="billing='Yearly'; toggleRepositionMarker($el)" :class="{ 'text-white': billing == 'Yearly', 'text-zinc-900' : billing != 'Yearly' }" class="relative z-20 px-3.5 py-1 text-sm font-medium leading-6 rounded-full duration-300 ease-out cursor-pointer">
-                    Yearly
-                </div>
-                <div x-ref="marker" class="absolute left-0 z-10 w-1/2 h-full opacity-0" x-cloak>
-                    <div class="w-full h-full rounded-full shadow-sm bg-zinc-900"></div>
-                </div>
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css"> <!-- Add your CSS file here -->
+    <title>Subscription Plans</title>
+</head>
+<body>
+    <div class="plans-container space-y-8">
+        <?php foreach ($tiers as $tier): ?>
+        <article class="plan">
+            <div class="rounded-3xl rounded-t-3xl bg-white/60 p-8 ring-1 ring-gray-900/10 sm:mx-8 rounded-lg">
+                <h2 id="tier-hobby" class="text-base/7 font-semibold text-indigo-600">
+                    <?= htmlspecialchars($tier['title']) ?>
+                </h2>
+                <p class="mt-4 flex items-baseline gap-x-2">
+                    <span class="text-5xl font-semibold tracking-tight text-gray-900">
+                        <?= htmlspecialchars($tier['monthly_price']) ?>
+                    </span>
+                    <span class="text-base text-gray-500">/maand</span>
+                </p>
+                <p class="mt-4 text-gray-400">of</p>
+                <p class="mt-4 flex items-baseline gap-x-2">
+                    <span class="text-3xl font-semibold tracking-tight text-gray-900">
+                        <?= htmlspecialchars($tier['yearly_price']) ?>
+                    </span>
+                    <span class="text-base text-gray-500">/jaar</span>
+                </p>
+                <ul role="list" class="mt-8 space-y-3 text-sm/6 text-gray-600 sm:mt-10">
+                    <?php foreach ($tier['features'] as $feature): ?>
+                    <li class="flex gap-x-3">
+                        <svg class="h-6 w-5 flex-none text-indigo-600" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
+                            <path fill-rule="evenodd" d="M16.704 4.153a.75.75 0 0 1 .143 1.052l-8 10.5a.75.75 0 0 1-1.127.075l-4.5-4.5a.75.75 0 0 1 1.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 0 1 1.05-.143Z" clip-rule="evenodd" />
+                        </svg>
+                        <?= htmlspecialchars($feature) ?>
+                    </li>
+                    <?php endforeach; ?>
+                </ul>
+                
+
+                <form action="{{ url('/checkout') }}" method="GET">
+                    <input type="hidden" name="billing" value="monthly">
+                    <div class="flex gap-4 mt-6">
+                        <button type="submit" 
+                            class="rounded-md px-3.5 py-2.5 text-sm font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:bg-indigo-600 hover:text-white">
+                            Kies Maandelijks
+                        </button>
+                        <button type="submit" 
+                            name="billing" value="yearly" 
+                            class="rounded-md px-3.5 py-2.5 text-sm font-semibold text-indigo-600 ring-1 ring-inset ring-indigo-200 hover:bg-indigo-600 hover:text-white">
+                            Kies Jaarlijks
+                        </button>
+                    </div>
+                </form>
+
+
             </div>
-        </div>
-        @endif
-
-        <div class="flex flex-col flex-wrap lg:flex-row lg:space-x-5">
-
-            @foreach(Wave\Plan::where('active', 1)->get() as $plan)
-            @php $features = explode(',', $plan->features); @endphp
-            <div
-                {{--  Say that you have a monthly plan that doesn't have a yearly plan, in that case we will hide the place that doesn't have a price_id --}}
-                x-show="(billing == 'Monthly' && '{{ $plan->monthly_price_id }}' != '') || (billing == 'Yearly' && '{{ $plan->yearly_price_id }}' != '')"
-                class="flex-1 w-full px-0 mx-auto mb-6 md:max-w-lg lg:mb-0" x-cloak>
-                <div class="flex flex-col lg:mb-10 h-full bg-white rounded-xl border-2  @if($plan->default){{ 'border-zinc-900 lg:scale-105' }}@else{{ 'border-zinc-200' }}@endif shadow-sm sm:mb-0">
-                    <div class="px-8 pt-8">
-                        <span class="px-4 py-1 text-base font-medium text-white rounded-full bg-zinc-900 text-uppercase" data-primary="indigo-700">
-                            {{ $plan->name }}
-                        </span>
-                    </div>
-
-                    <div class="px-8 mt-5">
-                        <div class="flex items-baseline space-x-2">
-                            <span class="text-5xl font-bold">
-                                €<span x-text="
-                                    billing == 'Monthly' 
-                                    ? '{{ number_format($plan->monthly_price * 0.9, 2) }}'  // 10% discount on first month
-                                    : '{{ number_format(($plan->monthly_price * 12) * 0.85, 2) }}' // 15% discount for yearly price
-                                "></span>
-                            </span>
-                            <span class="text-lg font-medium text-zinc-500 line-through">
-                                €<span x-text="
-                                    billing == 'Monthly'
-                                    ? '{{ number_format($plan->monthly_price, 2) }}'
-                                    : '{{ number_format($plan->monthly_price * 12, 2) }}'
-                                "></span>
-                            </span>
-                        </div>
-                        <span class="text-xl font-bold text-zinc-500">
-                            <span x-text="billing == 'Monthly' ? '/maand (eerste maand)' : '/jaar (15% korting)'"></span>
-                        </span>
-                    </div>
-
-                    <div class="px-8 pb-10 mt-3">
-                        <p class="text-base leading-7 text-zinc-500">{{ $plan->description }}</p>
-                    </div>
-
-                    <div class="p-8 mt-auto rounded-b-lg bg-zinc-50">
-                        <ul class="flex flex-col">
-                            @foreach($features as $feature)
-                            <li class="mt-1">
-                                <span class="flex items-center text-green-500">
-                                    <svg class="w-4 h-4 mr-3 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M0 11l2-2 5 5L18 3l2 2L7 18z"></path>
-                                    </svg>
-                                    <span class="text-zinc-700">
-                                        {{ $feature }}
-                                    </span>
-                                </span>
-                            </li>
-                            @endforeach
-                        </ul>
-
-                        <div class="mt-8">
-                            <x-button class="w-full" tag="a" href="/settings/subscription">
-                                Nu Aan de slag
-                            </x-button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endforeach
-        </div>
+        </article>
+        <?php endforeach; ?>
     </div>
-</section>  
+</body>
+</html>

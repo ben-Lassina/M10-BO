@@ -13,8 +13,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Wave\Facades\Wave;
-use Illuminate\Support\Facades\DB;
-
+use App\Http\Controllers\CheckoutController;
 
 // Wave routes
 Wave::routes();
@@ -30,6 +29,10 @@ Route::get('/images/search/{query?}', [ImageController::class, 'search']);
 use App\Http\Controllers\QuoteController;
 Route::get('/quote-of-the-day', [QuoteController::class, 'dailyQuote']);
 Route::get('/quotes/{language}', [QuoteController::class, 'quotesByLanguage']);
+
+Route::get('/checkout', [CheckoutController::class, 'createCheckout'])->name('stripe.checkout');
+Route::get('/success', [CheckoutController::class, 'handleSuccess'])->name('stripe.success');
+Route::get('/cancel', [CheckoutController::class, 'handleCancel'])->name('stripe.cancel');
 
 
 
