@@ -77,6 +77,7 @@
         button {
             margin: 0 12px; /* Add space between each button */
         }
+        
     </style>
 
     @auth

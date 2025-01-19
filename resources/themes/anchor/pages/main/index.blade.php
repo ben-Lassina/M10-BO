@@ -1,5 +1,7 @@
 <?php
+
 use function Laravel\Folio\{name};
+
 name('main');
 ?>
 
@@ -10,24 +12,22 @@ name('main');
         @auth
         <!-- Search Bar -->
         <div class="flex justify-center mb-6">
-            <input 
-                id="search-bar" 
-                type="text" 
-                placeholder="Zoek spreekwoorden..." 
+            <input
+                id="search-bar"
+                type="text"
+                placeholder="Zoek spreekwoorden..."
                 class="w-full max-w-md px-4 py-2 border rounded-lg"
-                onkeypress="handleSearchKeypress(event)"
-            />
+                onkeypress="handleSearchKeypress(event)" />
         </div>
 
         <!-- Alphabet Buttons -->
         <div class="flex flex-wrap justify-center gap-2 md:gap-4 mb-6">
             @foreach(range('A', 'Z') as $letter)
-                <button 
-                    onclick="fetchImages('{{ $letter }}')" 
-                    class="px-4 py-2 text-sm md:text-base border rounded-lg hover:bg-blue-500 hover:text-white transition"
-                >
-                    {{ $letter }}
-                </button>
+            <button
+                onclick="fetchImages('{{ $letter }}')"
+                class="px-4 py-2 text-sm md:text-base border rounded-lg hover:bg-blue-500 hover:text-white transition">
+                {{ $letter }}
+            </button>
             @endforeach
         </div>
         @endauth
@@ -36,73 +36,96 @@ name('main');
         <!-- Message for Unauthenticated Users -->
         <div class="flex justify-center mb-6">
             <p class="text-lg text-center text-red-500">
-                U moet zich aanmelden om toegang te krijgen tot deze content. 
+                U moet zich aanmelden om toegang te krijgen tot deze content.
                 <a href="/login" class="text-blue-500 underline">Aanmelden</a>
-                of 
-                <a href="/register" class="text-blue-500 underline">Registreren</a>.
+                of
+                <a href="/register" class="text-blue-500 underline">Registreren</a> .
             </p>
         </div>
         @endguest
 
         <!-- Modal -->
         @auth
-        <div 
-            id="image-modal" 
-            class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden z-50"
-        >
+        <div
+            id="image-modal"
+            class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50 hidden z-50">
             <div class="bg-white p-6 rounded-lg w-11/12 max-w-4xl relative z-50">
                 <!-- Close Button -->
-                <button 
-                    id="close-modal-btn" 
+                <button
+                    id="close-modal-btn"
                     class="absolute top-4 right-4 text-xl font-bold z-50">&times;
                 </button>
-                
+
                 <!-- Image Slider -->
                 <div id="image-slider" class="flex items-center justify-center space-x-4">
                     <button onclick="previousImage()" class="text-2xl font-bold">&larr;</button>
                     <img id="modal-image" src="" alt="" class="max-h-96 rounded shadow">
                     <button onclick="nextImage()" class="text-2xl font-bold">&rarr;</button>
                 </div>
+
+                <!-- Editable Meaning Field -->
+                <div class="mt-4">
+                    <textarea
+                        id="modal-meaning"
+                        rows="4"
+                        class="w-full p-2 border rounded-lg"
+                        placeholder="Betekenis aanpassen..."></textarea>
+                </div>
+
+                <!-- Save Button -->
+                <div class="text-center mt-4">
+                    <button
+                        id="save-meaning-btn"
+                        class="px-4 py-2 bg-green-500 text-white rounded-lg"
+                        onclick="saveMeaning()">Betekenis opslaan</button>
+                </div>
+
+                <!-- Download Button -->
+                <div class="text-center mt-4">
+                    <a
+                        id="download-btn"
+                        class="px-4 py-2 bg-blue-500 text-white rounded-lg"
+                        download>Download Image</a>
+                </div>
             </div>
         </div>
         @endauth
+
     </div>
 
     @auth
     <script>
-         // Global variables
-         let quotes = [];
+        // Global variables
+        let quotes = [];
         let currentIndex = 0;
 
         // Fetch daily quote
         function fetchDailyQuote() {
-    fetch('/quote-of-the-day')
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('daily-quote-image').src = data.image_path;
-            document.getElementById('daily-quote-text').innerText = data.quote;
-            document.getElementById('daily-quote-meaning').innerText = data.meaning;
-        })
-        .catch(error => console.error('Error fetching daily quote:', error));
-}
+            fetch('/quote-of-the-day')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('daily-quote-image').src = data.image_path;
+                    document.getElementById('daily-quote-text').innerText = data.quote;
+                    document.getElementById('daily-quote-meaning').innerText = data.meaning;
+                })
+                .catch(error => console.error('Error fetching daily quote:', error));
+        }
 
-
-function fetchQuotes(language) {
-    fetch(`/quotes/${language}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.error) {
-                alert(data.error);
-                return;
-            }
-            quotes = data;
-            currentIndex = 0; // Reset index
-            updateQuoteCarousel();
-            document.getElementById('quote-carousel').classList.remove('hidden');
-        })
-        .catch(error => console.error('Error fetching quotes:', error));
-}
-
+        function fetchQuotes(language) {
+            fetch(`/quotes/${language}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    quotes = data;
+                    currentIndex = 0; // Reset index
+                    updateQuoteCarousel();
+                    document.getElementById('quote-carousel').classList.remove('hidden');
+                })
+                .catch(error => console.error('Error fetching quotes:', error));
+        }
 
         // Update the carousel
         function updateQuoteCarousel() {
@@ -121,7 +144,6 @@ function fetchQuotes(language) {
         // Initialize daily quote fetch
         document.addEventListener('DOMContentLoaded', fetchDailyQuote);
 
-
         let images = [];
         let currentIndexs = 0;
 
@@ -137,7 +159,9 @@ function fetchQuotes(language) {
                     currentIndexs = 0;
 
                     if (images.length > 0) {
-                        showModal(images[0].path);
+                        // Check for the 'meaning' property and pass it, default to empty string if not found
+                        const meaning = images[0].meaning || '';
+                        showModal(images[0].path, meaning);
                     } else {
                         alert('Geen afbeeldingen gevonden.');
                     }
@@ -162,15 +186,40 @@ function fetchQuotes(language) {
             }
         }
 
-        // Show image modal
-        function showModal(imagePath) {
+        // Show image modal with editable meaning field
+        function showModal(imagePath, initialMeaning = '') {
             document.getElementById('modal-image').src = imagePath;
+            const downloadButton = document.getElementById('download-btn');
+            downloadButton.href = imagePath; // Set the download link to the image path
+
+            // Set the initial meaning in the editable textarea
+            const meaningField = document.getElementById('modal-meaning');
+            meaningField.value = initialMeaning || ''; // Default to empty if no meaning is provided
+
             document.getElementById('image-modal').classList.remove('hidden');
         }
 
-        // Close the modal
-        function closeModal() {
-            document.getElementById('image-modal').classList.add('hidden');
+        // Save the edited meaning
+        function saveMeaning() {
+            const updatedMeaning = document.getElementById('modal-meaning').value;
+
+            if (updatedMeaning.trim() !== "") {
+                alert("Meaning saved: " + updatedMeaning);
+                // You can replace the above alert with a function to update the meaning on the backend
+                // For example, make an API request to save the updated meaning:
+                // fetch('/save-meaning', {
+                //     method: 'POST',
+                //     body: JSON.stringify({ meaning: updatedMeaning }),
+                //     headers: { 'Content-Type': 'application/json' }
+                // })
+                // .then(response => response.json())
+                // .then(data => {
+                //     console.log('Meaning saved:', data);
+                // })
+                // .catch(error => console.error('Error saving meaning:', error));
+            } else {
+                alert("Please enter a valid meaning.");
+            }
         }
 
         // Show previous image
@@ -190,7 +239,9 @@ function fetchQuotes(language) {
         }
 
         // Add event listener to close the modal
-        document.getElementById('close-modal-btn').addEventListener('click', closeModal);
+        document.getElementById('close-modal-btn').addEventListener('click', function() {
+            document.getElementById('image-modal').classList.add('hidden');
+        });
     </script>
     @endauth
 

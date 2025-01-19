@@ -1,3 +1,4 @@
+
 <?php
 
 use function Laravel\Folio\{name};
@@ -5,19 +6,16 @@ use function Laravel\Folio\{name};
 name('home');
 ?>
 
-<meta name="description" content="{{ $page['description'] ?? 'Spreekwoorden en gezegden tool - Leer Nederlandse spreekwoorden met illustraties en betekenissen.' }}">
-<meta name="keywords" content="spreekwoorden, gezegden, Nederlands leren, illustraties, betekenissen">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta property="og:image" content="{{ url($page['image'] ?? '/og_image.png') }}">
-<meta property="og:type" content="website">
+
 
 
 <x-layouts.marketing
     :seo="[
-        'title'         => setting('site.title', 'Spreekwoorden en gezegden tool'),
-        'description'   => setting('site.description', 'Spreekwoorden en gezegden tool'),
+        'title'         => setting('site.title', 'Spreekwoorden en gezegden tool - Leer Nederlandse spreekwoorden met illustraties en betekenissen.'),
+        'description'   => setting('site.description', 'spreekwoorden, gezegden, Nederlands leren, illustraties, betekenissen'),
         'image'         => url('/og_image.png'),
         'type'          => 'website'
+        
     ]">
 
     <x-marketing.sections.hero />

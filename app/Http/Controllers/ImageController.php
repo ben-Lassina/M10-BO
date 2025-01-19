@@ -31,8 +31,8 @@ class ImageController extends Controller
         \Log::info("Search query: $query");
 
         $images = Image::where('title', 'like', "%$query%")
-                        ->orWhere('letter', 'like', "%$query%")
-                        ->get();
+            ->orWhere('letter', 'like', "%$query%")
+            ->get();
 
         if ($images->isEmpty()) {
             \Log::warning("No results found for search query: $query");

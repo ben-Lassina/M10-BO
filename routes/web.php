@@ -26,15 +26,14 @@ Route::get('/images/search', [ImageController::class, 'search']);
 Route::get('/spreekwoorden', [ImageController::class, 'index'])->name('spreekwoorden.index');
 Route::get('/images/search/{query?}', [ImageController::class, 'search']);
 
+
+
+
 use App\Http\Controllers\QuoteController;
+
 Route::get('/quote-of-the-day', [QuoteController::class, 'dailyQuote']);
 Route::get('/quotes/{language}', [QuoteController::class, 'quotesByLanguage']);
 
 Route::get('/checkout', [CheckoutController::class, 'createCheckout'])->name('stripe.checkout');
 Route::get('/success', [CheckoutController::class, 'handleSuccess'])->name('stripe.success');
 Route::get('/cancel', [CheckoutController::class, 'handleCancel'])->name('stripe.cancel');
-
-
-
-
-
