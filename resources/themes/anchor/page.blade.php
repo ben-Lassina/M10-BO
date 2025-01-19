@@ -1,11 +1,16 @@
-<x-layouts.marketing>
+<x-layouts.marketing
+    :seo="[
+        'title'         => setting('site.title', 'Spreekwoorden en gezegden tool'),
+        'description'   => setting('site.description', 'Spreekwoorden en gezegden tool'),
+        'image'         => url('/og_image.png'),
+        'type'          => 'website'
+    ]">
 
     <x-elements.back-button
         class="max-w-3xl mx-auto mt-4 md:mt-8"
         text="Return Back Home"
-        :href="route('home')"
-    />
-    
+        :href="route('home')" />
+
     <article id="post-{{ $page['id'] }}" class="max-w-3xl px-5 mx-auto mb-32 prose prose-lg lg:prose-xl lg:px-0">
 
         <meta property="name" content="{{ $page['title'] }}">
@@ -23,9 +28,9 @@
         </div>
 
         @if($page['image'])
-            <div class="relative">
-                <img class="w-full h-auto rounded-lg" src="{{ url($page['image']) }}" alt="{{ url($page['image']) }}" srcset="{{ url($page['image']) }}">
-            </div>
+        <div class="relative">
+            <img class="w-full h-auto rounded-lg" src="{{ url($page['image']) }}" alt="{{ url($page['image']) }}" srcset="{{ url($page['image']) }}">
+        </div>
         @endif
 
         <div class="max-w-4xl mx-auto">
